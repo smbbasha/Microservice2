@@ -4,7 +4,7 @@ node {
 
      
   stage('Git-Checkout') {
-   git 'https://github.com/Sandeepkr93/completedevops.git'
+   git 'https://github.com/Sandeepkr93/Microservice2.git'
   }
   stage('Input to continue forther') {
    input('git checkout done Do you want to forther proceed?')  
@@ -50,22 +50,7 @@ def server= Artifactory.server 'jfrog'
     
   stage('Input for deploy in test server') {  
    input('Do you want to test server proceed?')      
-        }
-   stage('Docker-Stage-Deployment') {
-   sh label: 'DOCKER DEPLOYMENT', script: 'docker-compose up -d --build'
-  }
-	 
- stage('Input for deploy in production server') {            
-   input('Do you want to deploy into production server proceed?')
-        }
-  stage('Geting Ready For Ansible') {
-  sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > index.html"
-}  
-   
-   stage('Prod Deployment on AWS'){
-   sh label: 'terraform', script: '/bin/terraform  init'
-   sh label: 'terraform', script: '/bin/terraform  apply -input=false -auto-approve'
-   }
+        }  
 }
 
 notify('Job Completed')   
