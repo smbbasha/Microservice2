@@ -1,4 +1,4 @@
-FROM tomcat:9.0
+FROM tomcat:8.0
 MAINTAINER SANDEEP
 RUN echo 'Deploying War on Server'
 RUN rm -rf /usr/local/tomcat/webapps/*
