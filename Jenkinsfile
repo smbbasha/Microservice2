@@ -4,7 +4,7 @@ node {
 
      
   stage('Git-Checkout') {
-   git 'https://github.com/Sandeepkr93/Microservice2.git'
+   git 'https://github.com/smbbasha/Microservice2.git'
   }
   stage('Input to continue forther') {
    input('git checkout done Do you want to forther proceed?')  
@@ -44,6 +44,19 @@ def server= Artifactory.server 'jfrog'
                     }"""
                     server.upload (uploadSpec)
 }  
+stage('Jfrog Artifactory download'){
+    def server= Artifactory.server 'jfrog'
+    def downloadSpec = """{
+    "files": [
+    {
+      "pattern": "Devops301/*.war",
+      "target": "/home/mansoor4win/Target/"
+     
+    }
+    ]
+    }"""
+    server.download(downloadSpec)
+  }
     
   stage('Input for deploy in test server') {  
    input('Do you want to test server proceed?')      
